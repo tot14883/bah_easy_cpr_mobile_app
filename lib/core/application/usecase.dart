@@ -7,6 +7,7 @@ import 'package:logging/logging.dart';
 import 'package:multiple_result/multiple_result.dart';
 
 abstract class UseCase<P, R> {
+  // ignore: unused_field
   Ref? _ref;
 
   set ref(Ref ref) {

@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:logging/logging.dart';
 import 'package:rxdart/rxdart.dart';
 
-abstract class BaseConsumerState<T extends ConsumerStatefulWidget>
-    extends ConsumerState<T> with RestorationMixin<T>, WidgetsBindingObserver {
+abstract class BaseConsumerState<T extends ConsumerStatefulWidget> extends ConsumerState<T>
+    with RestorationMixin<T>, WidgetsBindingObserver {
   CompositeSubscription get compositeSubscription => CompositeSubscription();
 
   Logger get log => Logger(T.toString());

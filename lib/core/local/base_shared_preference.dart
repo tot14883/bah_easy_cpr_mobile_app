@@ -37,8 +37,7 @@ class BaseSharedPreference {
   bool? getBool(BaseSharePreferenceKey sharedPreferenceKey) =>
       _preferences?.getBool(sharedPreferenceKey.sharedPrefsKey);
 
-  int? getInt(BaseSharePreferenceKey sharedPreferenceKey) =>
-      _preferences?.getInt(sharedPreferenceKey.sharedPrefsKey);
+  int? getInt(BaseSharePreferenceKey sharedPreferenceKey) => _preferences?.getInt(sharedPreferenceKey.sharedPrefsKey);
 
   double? getDouble(BaseSharePreferenceKey sharedPreferenceKey) =>
       _preferences?.getDouble(sharedPreferenceKey.sharedPrefsKey);

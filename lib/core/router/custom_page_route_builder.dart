@@ -31,8 +31,7 @@ class CustomPageRouteBuilder {
     }
 
     return PageRouteBuilder<T>(
-      transitionDuration:
-          transitionDuration ?? const Duration(milliseconds: 300),
+      transitionDuration: transitionDuration ?? const Duration(milliseconds: 300),
       pageBuilder: (context, _, __) => builder(context),
       settings: RouteSettings(name: name),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
