@@ -46,7 +46,6 @@ linter:
     camel_case_types: true
     flutter_style_todos: true
     always_declare_return_types: true
-    unused_import: true
     require_trailing_commas: true
     sort_child_properties_last: true
     library_private_types_in_public_api: false
