@@ -33,6 +33,7 @@ analyzer:
     unused_import: error
     require_trailing_commas: info
     sort_child_properties_last: warning
+    unused_field: ignore
 
 linter:
   rules:
