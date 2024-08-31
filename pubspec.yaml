@@ -48,6 +48,8 @@ dependencies:
   package_info_plus: ^8.0.0
   # https://pub.dev/packages/device_info_plus
   device_info_plus: ^10.1.0
+  # https://pub.dev/packages/url_launcher
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
