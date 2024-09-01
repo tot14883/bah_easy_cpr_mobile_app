@@ -50,6 +50,8 @@ dependencies:
   device_info_plus: ^10.1.0
   # https://pub.dev/packages/url_launcher
   url_launcher: ^6.3.0
+  # https://pub.dev/packages/video_player
+  video_player: ^2.9.1
 
 dev_dependencies:
   flutter_test:
@@ -82,6 +84,7 @@ flutter:
     - assets/
     - assets/icons/
     - assets/imgs/
+    - assets/videos/
 
   fonts:
     - family: NotoSansThai

@@ -47,7 +47,11 @@
 	<true/>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-	<string>tel</string>
+		<string>tel</string>
+	</array>
+	<key>NSAppTransportSecurity</key>
+	<array>
+		<string>http</string>
 	</array>
 </dict>
 </plist>

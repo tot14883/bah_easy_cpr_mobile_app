@@ -1,15 +1,46 @@
 import 'package:bah_easy_cpr/core/style/app_color.dart';
 import 'package:bah_easy_cpr/core/style/app_style.dart';
 import 'package:bah_easy_cpr/generated/assets.gen.dart';
+import 'package:bah_easy_cpr/page/cpr_follow_instruction_screen.dart';
+import 'package:bah_easy_cpr/page/patient_recovery_position_screen.dart';
 import 'package:bah_easy_cpr/widget/base_widget/base_button.dart';
+import 'package:bah_easy_cpr/widget/base_widget/base_consumer_state.dart';
 import 'package:bah_easy_cpr/widget/base_widget/base_scaffold.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:video_player/video_player.dart';
 
-class ObserveBreathingPatternsScreen extends StatelessWidget {
+class ObserveBreathingPatternsScreen extends ConsumerStatefulWidget {
   static const routeName = "ObserveBreathingPatternsScreen";
 
   const ObserveBreathingPatternsScreen({super.key});
+
+  @override
+  _ObserveBreathingPatternsScreenState createState() => _ObserveBreathingPatternsScreenState();
+}
+
+class _ObserveBreathingPatternsScreenState extends BaseConsumerState<ObserveBreathingPatternsScreen> {
+  late VideoPlayerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = VideoPlayerController.asset(Assets.videos.observeBreathVideo)
+      ..initialize().then((_) {
+        setState(() {});
+
+        controller
+          ..play()
+          ..setLooping(true);
+      });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,51 +48,104 @@ class ObserveBreathingPatternsScreen extends StatelessWidget {
       bodyBuilder: (context, constraints) {
         return Padding(
           padding: const EdgeInsets.fromLTRB(24, 0, 24, 24).r,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Assets.icons.icThreeDot.svg(),
-                  Assets.icons.icThreeDot.svg(),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: const Icon(Icons.arrow_back_ios),
+                  ),
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Assets.icons.icThreeDot.svg(),
+                    Assets.icons.icThreeDot.svg(),
+                  ],
+                ),
+                Text(
+                  'สังเกตุลักษณะการหายใจ',
+                  textAlign: TextAlign.center,
+                  style: AppStyle.txtHeader20Blod.copyWith(
+                    color: AppColor.themeSecondColor,
+                  ),
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+                if (controller.value.isInitialized) ...[
+                  AspectRatio(
+                    aspectRatio: controller.value.aspectRatio,
+                    child: VideoPlayer(controller),
+                  ),
                 ],
-              ),
-              Text(
-                'สังเกตุลักษณะการหายใจ',
-                style: AppStyle.txtHeader20Blod.copyWith(
-                  color: AppColor.themeSecondColor,
+                SizedBox(
+                  height: 24.h,
                 ),
-              ),
-              Text(
-                'หายใจปกติ?',
-                style: AppStyle.txtHeader18Semi.copyWith(
-                  color: AppColor.themeSecondColor,
+                Text(
+                  'หายใจปกติ?',
+                  textAlign: TextAlign.center,
+                  style: AppStyle.txtHeader18Semi.copyWith(
+                    color: AppColor.themeSecondColor,
+                  ),
                 ),
-              ),
-              BaseButton(
-                buttonType: ButtonType.secondary,
-                width: 150.w,
-                txtColor: AppColor.themePrimaryColor,
-                onTap: () {},
-                text: 'ปกติ',
-              ),
-              SizedBox(
-                height: 8.h,
-              ),
-              Text(
-                'ไม่หายใจ/หายใจเฮือก',
-                style: AppStyle.txtHeader18Semi.copyWith(
-                  color: AppColor.themeSecondColor,
+                BaseButton(
+                  buttonType: ButtonType.secondary,
+                  width: 150.w,
+                  txtColor: AppColor.themePrimaryColor,
+                  onTap: () async {
+                    await controller.seekTo(Duration.zero);
+                    await controller.pause();
+
+                    // ignore: use_build_context_synchronously
+                    final result = await Navigator.of(context).pushNamed<bool>(
+                      PatientRecoveryPositionScreen.routeName,
+                    );
+
+                    if (result!) {
+                      await controller.play();
+                    }
+                  },
+                  text: 'ปกติ',
                 ),
-              ),
-              BaseButton(
-                width: 150.w,
-                onTap: () {},
-                text: 'ผิดปกติ',
-              ),
-            ],
+                SizedBox(
+                  height: 8.h,
+                ),
+                Text(
+                  'ไม่หายใจ/หายใจเฮือก',
+                  textAlign: TextAlign.center,
+                  style: AppStyle.txtHeader18Semi.copyWith(
+                    color: AppColor.themeSecondColor,
+                  ),
+                ),
+                BaseButton(
+                  width: 150.w,
+                  onTap: () async {
+                    await controller.seekTo(Duration.zero);
+                    await controller.pause();
+
+                    // ignore: use_build_context_synchronously
+                    final result = await Navigator.of(context).pushNamed<bool>(
+                      CprFollowInstructionScreen.routeName,
+                    );
+
+                    if (result!) {
+                      await controller.play();
+                    }
+                  },
+                  text: 'ผิดปกติ',
+                ),
+              ],
+            ),
           ),
         );
       },

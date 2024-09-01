@@ -41,11 +41,52 @@ class $AssetsImgsGen {
   List<AssetGenImage> get values => [background, bhrLogo, logoApp512, namedBanner];
 }
 
+class $AssetsVideosGen {
+  const $AssetsVideosGen();
+
+  /// File path: assets/videos/checking_area_video.mov
+  String get checkingAreaVideo => 'assets/videos/checking_area_video.mov';
+
+  /// File path: assets/videos/cpr_follow_instruction_video.mov
+  String get cprFollowInstructionVideo => 'assets/videos/cpr_follow_instruction_video.mov';
+
+  /// File path: assets/videos/finding_unconscious_video.mov
+  String get findingUnconsciousVideo => 'assets/videos/finding_unconscious_video.mov';
+
+  /// File path: assets/videos/how_to_cpr_video.mov
+  String get howToCprVideo => 'assets/videos/how_to_cpr_video.mov';
+
+  /// File path: assets/videos/observe_breath_video.mov
+  String get observeBreathVideo => 'assets/videos/observe_breath_video.mov';
+
+  /// File path: assets/videos/recover_position_video.mov
+  String get recoverPositionVideo => 'assets/videos/recover_position_video.mov';
+
+  /// File path: assets/videos/rescue_breath_video.mov
+  String get rescueBreathVideo => 'assets/videos/rescue_breath_video.mov';
+
+  /// File path: assets/videos/rhythmic_cpr_video.mov
+  String get rhythmicCprVideo => 'assets/videos/rhythmic_cpr_video.mov';
+
+  /// List of all assets
+  List<String> get values => [
+        checkingAreaVideo,
+        cprFollowInstructionVideo,
+        findingUnconsciousVideo,
+        howToCprVideo,
+        observeBreathVideo,
+        recoverPositionVideo,
+        rescueBreathVideo,
+        rhythmicCprVideo
+      ];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImgsGen imgs = $AssetsImgsGen();
+  static const $AssetsVideosGen videos = $AssetsVideosGen();
 }
 
 class AssetGenImage {
