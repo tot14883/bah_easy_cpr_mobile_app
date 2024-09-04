@@ -25,7 +25,7 @@ class _InstructionAedScreenState extends BaseConsumerState<InstructionAedScreen>
   @override
   void initState() {
     super.initState();
-    controller = VideoPlayerController.asset(Assets.videos.cprFollowInstructionVideo)
+    controller = VideoPlayerController.asset(Assets.videos.howToAedVideo)
       ..initialize().then((_) {
         setState(() {});
         controller

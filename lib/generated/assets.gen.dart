@@ -53,6 +53,9 @@ class $AssetsVideosGen {
   /// File path: assets/videos/finding_unconscious_video.mov
   String get findingUnconsciousVideo => 'assets/videos/finding_unconscious_video.mov';
 
+  /// File path: assets/videos/how_to_aed_video.mov
+  String get howToAedVideo => 'assets/videos/how_to_aed_video.mov';
+
   /// File path: assets/videos/how_to_cpr_video.mov
   String get howToCprVideo => 'assets/videos/how_to_cpr_video.mov';
 
@@ -73,6 +76,7 @@ class $AssetsVideosGen {
         checkingAreaVideo,
         cprFollowInstructionVideo,
         findingUnconsciousVideo,
+        howToAedVideo,
         howToCprVideo,
         observeBreathVideo,
         recoverPositionVideo,
