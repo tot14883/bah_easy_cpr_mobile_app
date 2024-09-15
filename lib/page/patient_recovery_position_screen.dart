@@ -1,0 +1,146 @@
+import 'package:bah_easy_cpr/core/style/app_color.dart';
+import 'package:bah_easy_cpr/core/style/app_style.dart';
+import 'package:bah_easy_cpr/generated/assets.gen.dart';
+import 'package:bah_easy_cpr/page/cpr_follow_instruction_screen.dart';
+import 'package:bah_easy_cpr/util/url_launcher_util.dart';
+import 'package:bah_easy_cpr/widget/base_widget/base_button.dart';
+import 'package:bah_easy_cpr/widget/base_widget/base_consumer_state.dart';
+import 'package:bah_easy_cpr/widget/base_widget/base_scaffold.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:video_player/video_player.dart';
+
+class PatientRecoveryPositionScreen extends ConsumerStatefulWidget {
+  static const routeName = "PatientRecoveryPositionScreen";
+
+  const PatientRecoveryPositionScreen({super.key});
+
+  @override
+  _PatientRecoveryPositionScreenState createState() => _PatientRecoveryPositionScreenState();
+}
+
+class _PatientRecoveryPositionScreenState extends BaseConsumerState<PatientRecoveryPositionScreen> {
+  late VideoPlayerController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = VideoPlayerController.asset(Assets.videos.recoverPositionVideo)
+      ..initialize().then((_) {
+        setState(() {});
+
+        controller
+          ..play()
+          ..setLooping(true);
+      });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseScaffold(
+      bodyBuilder: (context, constraints) {
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(24, 0, 24, 24).r,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pop(true);
+                    },
+                    child: const Icon(Icons.arrow_back_ios),
+                  ),
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Assets.icons.icThreeDot.svg(),
+                    Assets.icons.icThreeDot.svg(),
+                  ],
+                ),
+                Text(
+                  'จัดผู้ป่วยในท่าพักฟื้น',
+                  textAlign: TextAlign.center,
+                  style: AppStyle.txtHeader20Blod.copyWith(
+                    color: AppColor.themeSecondColor,
+                  ),
+                ),
+                SizedBox(
+                  height: 16.h,
+                ),
+                if (controller.value.isInitialized) ...[
+                  AspectRatio(
+                    aspectRatio: controller.value.aspectRatio,
+                    child: VideoPlayer(controller),
+                  ),
+                ],
+                SizedBox(
+                  height: 24.h,
+                ),
+                Text(
+                  'ขอความช่วยเหลือ',
+                  textAlign: TextAlign.center,
+                  style: AppStyle.txtHeader18Semi.copyWith(
+                    color: AppColor.themeSecondColor,
+                  ),
+                ),
+                BaseButton(
+                  buttonType: ButtonType.secondary,
+                  width: 150.w,
+                  txtColor: AppColor.themePrimaryColor,
+                  onTap: () async {
+                    await controller.seekTo(Duration.zero);
+                    await controller.pause();
+                    await UrlLauncherUtil.launchUrl('1669');
+                  },
+                  text: 'โทร 1669',
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Text(
+                  'ผู้ป่วยไม่หายใจ',
+                  textAlign: TextAlign.center,
+                  style: AppStyle.txtHeader18Semi.copyWith(
+                    color: AppColor.themeSecondColor,
+                  ),
+                ),
+                BaseButton(
+                  width: 150.w,
+                  onTap: () async {
+                    await controller.seekTo(Duration.zero);
+                    await controller.pause();
+
+                    // ignore: use_build_context_synchronously
+                    final result = await Navigator.of(context).pushNamed<bool>(
+                      CprFollowInstructionScreen.routeName,
+                    );
+
+                    if (result!) {
+                      await controller.play();
+                    }
+                  },
+                  text: 'เริ่ม CPR',
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}

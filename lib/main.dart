@@ -72,7 +72,7 @@ class _MyAppState extends BaseConsumerState<MyApp> {
           debugShowCheckedModeBanner: false,
           initialRoute: AppRouter.initialRouterName,
           onGenerateRoute: AppRouter.router,
-          title: 'SYS',
+          title: 'BAH easy CPR',
           builder: (context, child) {
             return SizedBox(
               child: child,
