@@ -18,12 +18,9 @@ class ListTileWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          padding: const EdgeInsets.all(4).r,
-          decoration: BoxDecoration(
-            color: AppColor.themeBlackColor,
-            borderRadius: BorderRadius.circular(150 / 2),
-          ),
+        Text(
+          '\u2022',
+          style: AppStyle.txtHeader18Semi,
         ),
         SizedBox(
           width: 4.w,

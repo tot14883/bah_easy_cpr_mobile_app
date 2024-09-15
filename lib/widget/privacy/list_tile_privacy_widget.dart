@@ -18,21 +18,22 @@ class ListTilePrivacyWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Container(
-          padding: const EdgeInsets.all(4).r,
-          decoration: BoxDecoration(
+        Text(
+          '\u2022',
+          style: AppStyle.txtHeader18Semi.copyWith(
             color: AppColor.themeSecondColor,
-            borderRadius: BorderRadius.circular(150 / 2),
+            height: 0,
           ),
         ),
         SizedBox(
-          width: 4.w,
+          width: 8.w,
         ),
         Expanded(
           child: Text(
             txt,
             style: AppStyle.txtBody16Regular.copyWith(
               color: AppColor.themeSecondColor,
+              height: 0,
             ),
           ),
         ),
